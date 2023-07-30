@@ -170,8 +170,8 @@ def main():
     with ThreadPoolExecutor(max_workers=num_cores) as ex:
         for name in names:
             ex.submit(_worker, name)
-    size = sum(os.path.getsize(os.path.join("zip", name)) for name in os.listdir("zip"))
-    print(f"Work: {round((time.monotonic_ns() - st) / 1000000000, 4)}s, new size: {size / (1024 ** 2):.2f}mb")
+    size2 = sum(os.path.getsize(os.path.join("zip", name)) for name in os.listdir("zip"))
+    print(f"Work: {round((time.monotonic_ns() - st) / 1000000000, 4)}s, {size / (1024 ** 2):.2f}mb -> {size2 / (1024 ** 2):.2f}mb")
 
 
 if __name__ == '__main__':
