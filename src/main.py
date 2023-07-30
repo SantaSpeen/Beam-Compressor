@@ -18,6 +18,8 @@ st0 = 0
 
 async def _unzip(extract_to, zip_file, file_info):
     file_name = file_info.filename
+    if "mod_info/" in file_name:
+        return
     file_content = await asyncio.to_thread(zip_file.read, file_info)
     path = f"{extract_to}/{file_name}"
     if ((path.endswith("/") or os.path.isdir(path)) and not os.path.exists(path)) or not os.path.exists(
@@ -55,7 +57,7 @@ async def compress_file(file_path):
         image = Image.open(file_path)
         resize_cof = 0.8
         sizes = {16384: 4, 8192: 4, 4096: 2, 2048: 2, 1024: 2, 512: 2}
-        if min(image.size) >= 513:
+        if min(image.size) > 512:
             x, y = image.size[0], image.size[1]
             vxy = sizes.keys()
             if x in vxy and y in vxy:
@@ -90,7 +92,7 @@ async def compress_files(unzip_path):
             if ext in ('txt', 'pdn', 'ini'):
                 continue
             file_path = os.path.join(path, file)
-            if ext in ('jpg', 'png'):  # , "dds"):
+            if ext in ('jpg', 'png', "dds"):
                 t = loop.create_task(compress_file(file_path))
                 wt.append(t)
             all_files.append(os.path.relpath(file_path, unzip_path))
