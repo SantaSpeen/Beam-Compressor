@@ -13,7 +13,7 @@ pip install -r requirements.txt
 cd src
 ```
 
-Then put your mods in `mods/` directory.
+Then put your mods in `mods/` directory.\
 Then run:
 ```bash
 python main.py
@@ -24,25 +24,27 @@ python main.py
 Ryzen 7 5800H, m2
 ```
 Starting process on 68 files, 6646.55mb, cores 16...
-[1 ] Started: BMW_E36_Revamp_BETA.zip
-[2 ] Started: 2140SLver2.5fix.zip
+[1 ] Started: 2140SLver2.5fix.zip
+[2 ] Started: BMW_E36_Revamp_BETA.zip
+[3 ] Started: Bochkakvassa.zip
 ....
-[66] [from_start=  319.67s] [wait 2 ] | [unzip   1.28s] -> [compress  47.19s] -> [zip   18.7s] [160.28mb ->  96.25mb]: VolgaGAZ3102.31029ver.3.0.zip
-[57] [from_start=  329.49s] [wait 1 ] | [unzip   1.67s] -> [compress  36.55s] -> [zip  79.45s] [145.48mb -> 114.08mb]: Toyota_AE86.zip
-[67] [from_start=   366.3s] [wait 0 ] | [unzip   1.75s] -> [compress  44.12s] -> [zip  58.66s] [169.26mb ->  143.6mb]: Volkswagen_Golf_7.zip
-Work: 366.312s, 6646.55mb -> 5399.82mb
+[66] [from_start=  302.89s] [wait 2 ] | [unzip   1.19s] -> [compress  48.72s] -> [zip  18.31s] [160.28mb ->   96.5mb]: VolgaGAZ3102.31029ver.3.0.zip
+[57] [from_start=  313.19s] [wait 1 ] | [unzip   1.62s] -> [compress  34.94s] -> [zip  77.92s] [145.48mb -> 114.09mb]: Toyota_AE86.zip
+[67] [from_start=  348.47s] [wait 0 ] | [unzip    1.8s] -> [compress  45.05s] -> [zip  57.67s] [169.26mb -> 143.41mb]: Volkswagen_Golf_7.zip
+Work: 349.531s, 6646.55mb -> 5404.37mb
 ```
 
 Xeon E5-2640, HDD 7200
 ```
 Starting process on 60 files, 8798.27mb, cores 12...
-[1] Started: Honda_Civic_Type-R_EK9.zip
-[2] Started: Ibishu_Kashira_gen2.zip
+[1 ] Started: jato.zip
+[2 ] Started: pab_v55.zip
+[3 ] Started: Honda_Prelude.zip
 ...
-[59] [from_start=  290.06s] [wait 2 ] | [unzip   1.19s] -> [compress    3.7s] -> [zip  52.66s] [ 75.73mb ->  71.85mb]: Toyota_Supra_A70.zip
-[60] [from_start=  302.17s] [wait 1 ] | [unzip   1.14s] -> [compress  18.73s] -> [zip  44.33s] [ 58.14mb ->  52.99mb]: Toyota_Supra_MKV.zip
-[55] [from_start=   304.3s] [wait 0 ] | [unzip   0.88s] -> [compress  37.17s] -> [zip  15.09s] [ 90.35mb ->  67.39mb]: VolgaGAZ24ver3.0.zip
-Work: 472.9341s, 8798.27mb -> 7684.17mb
+[58] [from_start=  427.44s] [wait 2 ] | [unzip    0.5s] -> [compress  51.95s] -> [zip   7.18s] [ 87.12mb ->  54.63mb]: Mazda_Miata_Remastered.zip
+[49] [from_start=  430.46s] [wait 1 ] | [unzip   2.56s] -> [compress  24.36s] -> [zip 106.72s] [ 128.3mb -> 126.95mb]: Honda_Civic_Ferio.zip
+[50] [from_start=  430.82s] [wait 0 ] | [unzip   1.06s] -> [compress  46.75s] -> [zip   79.8s] [145.48mb -> 114.19mb]: Toyota_AE86.zip
+Work: 431.8857s, 8798.27mb -> 7688.41mb
 ```
 
 # License
