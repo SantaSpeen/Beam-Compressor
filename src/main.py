@@ -5,7 +5,6 @@ import shutil
 import time
 import traceback
 from concurrent.futures import ThreadPoolExecutor
-from threading import Thread
 from zipfile import ZipFile, ZIP_DEFLATED
 
 import aiofiles
@@ -14,9 +13,6 @@ from PIL import Image
 counter = 0
 ready = 0
 st0 = 0
-
-
-# Image.ID.append("BC4U")
 
 
 async def _unzip(extract_to, zip_file, file_info):
@@ -41,11 +37,15 @@ async def unzip_archive(zip_file_path: str, extract_to: str):
     zip_file.close()
 
 
-def zip_archive(file_paths, archive_name, unzip_path):
+async def zip_archive(file_paths, archive_name, unzip_path):
+    loop = asyncio.get_event_loop()
+
+    async def zip_file(file_path, arch):
+        arch.write(os.path.join(unzip_path, file_path), file_path)
+
     with ZipFile(archive_name, mode='w', compression=ZIP_DEFLATED, compresslevel=9) as archive:
-        for file_path in file_paths:
-            archive.write(os.path.join(unzip_path, file_path), file_path)
-        archive.close()
+        tasks = [loop.create_task(zip_file(file_path, archive)) for file_path in file_paths]
+        await asyncio.gather(*tasks)
 
 
 async def compress_file(file_path):
@@ -67,8 +67,6 @@ async def compress_file(file_path):
                 image.save(file_path, format="PNG", compresslevel=9)
             case "jpg":
                 image.save(file_path, format="JPEG", optimize=True, quality=25)
-            # case "dds":
-            #     image.save(buffer, format="DDS")
             case _:
                 image.save(file_path)
         image.close()
@@ -126,7 +124,7 @@ async def worker(name, loop):
         # print(f"[{c:<2}] Ready compress_files")
 
         st = time.monotonic_ns()
-        zip_archive(all_files, zip_path, unzip_path)
+        await zip_archive(all_files, zip_path, unzip_path)
         uz = round((time.monotonic_ns() - st) / 1000000000, 2)
 
         shutil.rmtree(unzip_path)
@@ -171,7 +169,8 @@ def main():
         for name in names:
             ex.submit(_worker, name)
     size2 = sum(os.path.getsize(os.path.join("zip", name)) for name in os.listdir("zip"))
-    print(f"Work: {round((time.monotonic_ns() - st) / 1000000000, 4)}s, {size / (1024 ** 2):.2f}mb -> {size2 / (1024 ** 2):.2f}mb")
+    print(
+        f"Work: {round((time.monotonic_ns() - st) / 1000000000, 4)}s, {size / (1024 ** 2):.2f}mb -> {size2 / (1024 ** 2):.2f}mb")
 
 
 if __name__ == '__main__':
