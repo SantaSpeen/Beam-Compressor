@@ -39,9 +39,9 @@ Starting process on 60 files, 8798.27mb, cores 12...
 [1] Started: Honda_Civic_Type-R_EK9.zip
 [2] Started: Ibishu_Kashira_gen2.zip
 ...
-[59] [from_start=  290.06s] [wait 9 ] | [unzip   1.19s] -> [compress    3.7s] -> [zip  52.66s] [ 75.73mb ->  71.85mb]: Toyota_Supra_A70.zip
-[60] [from_start=  302.17s] [wait 8 ] | [unzip   1.14s] -> [compress  18.73s] -> [zip  44.33s] [ 58.14mb ->  52.99mb]: Toyota_Supra_MKV.zip
-[55] [from_start=   304.3s] [wait 7 ] | [unzip   0.88s] -> [compress  37.17s] -> [zip  15.09s] [ 90.35mb ->  67.39mb]: VolgaGAZ24ver3.0.zip
+[59] [from_start=  290.06s] [wait 2 ] | [unzip   1.19s] -> [compress    3.7s] -> [zip  52.66s] [ 75.73mb ->  71.85mb]: Toyota_Supra_A70.zip
+[60] [from_start=  302.17s] [wait 1 ] | [unzip   1.14s] -> [compress  18.73s] -> [zip  44.33s] [ 58.14mb ->  52.99mb]: Toyota_Supra_MKV.zip
+[55] [from_start=   304.3s] [wait 0 ] | [unzip   0.88s] -> [compress  37.17s] -> [zip  15.09s] [ 90.35mb ->  67.39mb]: VolgaGAZ24ver3.0.zip
 Work: 472.9341s, 8798.27mb -> 7684.17mb
 ```
 
