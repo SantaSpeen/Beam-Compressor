@@ -11,6 +11,7 @@ import aiofiles
 from PIL import Image
 
 counter = 0
+_counter = 0
 ready = 0
 st0 = 0
 
@@ -105,7 +106,6 @@ async def worker(name, loop):
     counter += 1
     c = counter
     try:
-
         mods_path = "mods/" + name
         unzip_path = "../../unzip/" + name[:-4]
         zip_path = "zip/" + name
@@ -131,7 +131,7 @@ async def worker(name, loop):
         sz = round(os.path.getsize(zip_path) / (1024 * 1024), 2)
         te = round((time.monotonic_ns() - st0) / 1000000000, 2)
         ready += 1
-        print(f"[{c:<2}] [from_start={te:>8}s] [wait {counter - ready:<2}] | "
+        print(f"[{c:<2}] [from_start={te:>8}s] [wait {_counter - ready:<2}] | "
               f"[unzip {z:>6}s] -> [compress {cs:>6}s] -> [zip {uz:>6}s] [{s:>6}mb -> {sz:>6}mb]: {name}")
     except Exception as e:
         ready += 1
@@ -147,7 +147,7 @@ def _worker(name):
 
 
 def main():
-    global st0
+    global st0, _counter
     st = time.monotonic_ns()
     asyncio.set_event_loop(asyncio.new_event_loop())
     if os.path.exists("zip"):
@@ -163,7 +163,8 @@ def main():
             size += os.path.getsize("mods/" + name)
             names.append(name)
     num_cores = multiprocessing.cpu_count()
-    print(f"Starting process on {len(names)} files, {size / (1024 ** 2):.2f}mb, cores {num_cores}...")
+    _counter = len(names)
+    print(f"Starting process on {_counter} files, {size / (1024 ** 2):.2f}mb, cores {num_cores}...")
     st0 = time.monotonic_ns()
     with ThreadPoolExecutor(max_workers=num_cores) as ex:
         for name in names:
