@@ -10,8 +10,12 @@ Lost in file size up to 30%
 git clone https://github.com/SantaSpeen/Beam-Compressor.git
 cd Beam-Compressor
 pip install -r requirements.txt
-
 cd src
+```
+
+Then put your mods in `mods/` directory.
+Then run:
+```bash
 python main.py
 ```
 
