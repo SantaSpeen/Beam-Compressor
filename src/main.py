@@ -62,6 +62,7 @@ async def compress_file(file_path):
                 image = image.reduce(sizes[x])
             else:
                 new_size = (round(resize_cof * x), round(resize_cof * y))
+                # noinspection PyUnresolvedReferences
                 image = image.resize(new_size, resample=Image.Resampling.HAMMING, reducing_gap=1.5)
         match ext:
             case "png":
@@ -93,8 +94,8 @@ async def compress_files(unzip_path):
                 t = loop.create_task(compress_file(file_path))
                 wt.append(t)
             all_files.append(os.path.relpath(file_path, unzip_path))
-        for dir in names:
-            dir_path = os.path.join(path, dir)
+        for dir_name in names:
+            dir_path = os.path.join(path, dir_name)
             all_files.append(os.path.relpath(dir_path, unzip_path))
 
     await asyncio.gather(*wt)
@@ -170,8 +171,8 @@ def main():
         for name in names:
             ex.submit(_worker, name)
     size2 = sum(os.path.getsize(os.path.join("zip", name)) for name in os.listdir("zip"))
-    print(
-        f"Work: {round((time.monotonic_ns() - st) / 1000000000, 4)}s, {size / (1024 ** 2):.2f}mb -> {size2 / (1024 ** 2):.2f}mb")
+    print(f"Work: {round((time.monotonic_ns() - st) / 1000000000, 4)}s, "
+          f"{size / (1024 ** 2):.2f}mb -> {size2 / (1024 ** 2):.2f}mb")
 
 
 if __name__ == '__main__':
