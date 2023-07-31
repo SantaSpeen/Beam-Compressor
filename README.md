@@ -21,30 +21,34 @@ python main.py
 
 # Example output
 
-Ryzen 7 5800H, m2
+Ryzen 7 5800H, PCEx3 m2
 ```
-Starting process on 68 files, 6646.55mb, cores 16...
+Python 3.11.4 (Windows)
+Processor: AMD Ryzen 7 5800H with Radeon Graphics x16
+Starting process on 72 files, 9073.01mb, cores 16...
 [1 ] Started: 2140SLver2.5fix.zip
-[2 ] Started: BMW_E36_Revamp_BETA.zip
-[3 ] Started: Bochkakvassa.zip
+[2 ] Started: Acura_NSX.zip
+[3 ] Started: BMW_E36_Revamp_BETA.zip
 ....
-[66] [from_start=  302.89s] [wait 2 ] | [unzip   1.19s] -> [compress  48.72s] -> [zip  18.31s] [160.28mb ->   96.5mb]: VolgaGAZ3102.31029ver.3.0.zip
-[57] [from_start=  313.19s] [wait 1 ] | [unzip   1.62s] -> [compress  34.94s] -> [zip  77.92s] [145.48mb -> 114.09mb]: Toyota_AE86.zip
-[67] [from_start=  348.47s] [wait 0 ] | [unzip    1.8s] -> [compress  45.05s] -> [zip  57.67s] [169.26mb -> 143.41mb]: Volkswagen_Golf_7.zip
-Work: 349.531s, 6646.55mb -> 5404.37mb
+[71] [from_start=  288.94s] [wait 2 ] | [unzip   1.49s] -> [compress  14.92s] -> [zip  60.98s] [169.26mb ->  98.47mb]: Volkswagen_Golf_7.zip
+[56] [from_start=  367.51s] [wait 1 ] | [unzip   9.19s] -> [compress   63.3s] -> [zip 146.78s] [777.74mb -> 691.82mb]: RussianProvinceTownVer3.0FIXx0.28.zip
+[67] [from_start=  506.11s] [wait 0 ] | [unzip  15.02s] -> [compress  87.72s] -> [zip 206.17s] [1510.97mb -> 1408.0mb]: USSRProjectMapVer3.1AutumnEditionRelease.zip
+Work: 506.453s, 9073.01mb -> 6776.58mb
 ```
 
-Xeon E5-2640, HDD 7200
+Xeon E5-2640, SATA HDD 7200
 ```
-Starting process on 60 files, 8798.27mb, cores 12...
+Python 3.11.4 (Linux)
+Processor: Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz x12
+Starting process on 72 files, 9073.01mb, cores 12...
 [1 ] Started: jato.zip
 [2 ] Started: pab_v55.zip
 [3 ] Started: Honda_Prelude.zip
 ...
-[58] [from_start=  427.44s] [wait 2 ] | [unzip    0.5s] -> [compress  51.95s] -> [zip   7.18s] [ 87.12mb ->  54.63mb]: Mazda_Miata_Remastered.zip
-[49] [from_start=  430.46s] [wait 1 ] | [unzip   2.56s] -> [compress  24.36s] -> [zip 106.72s] [ 128.3mb -> 126.95mb]: Honda_Civic_Ferio.zip
-[50] [from_start=  430.82s] [wait 0 ] | [unzip   1.06s] -> [compress  46.75s] -> [zip   79.8s] [145.48mb -> 114.19mb]: Toyota_AE86.zip
-Work: 431.8857s, 8798.27mb -> 7688.41mb
+[69] [from_start=   504.6s] [wait 2 ] | [unzip  25.73s] -> [compress  27.06s] -> [zip   6.52s] [ 87.12mb ->  36.27mb]: Mazda_Miata_Remastered.zip
+[33] [from_start=  724.87s] [wait 1 ] | [unzip  28.56s] -> [compress 240.76s] -> [zip 294.36s] [1510.97mb -> 1411.83mb]: USSRProjectMapVer3.1AutumnEditionRelease.zip
+[71] [from_start=  806.75s] [wait 0 ] | [unzip  84.52s] -> [compress  79.56s] -> [zip 185.21s] [777.74mb -> 698.99mb]: RussianProvinceTownVer3.0FIXx0.28.zip
+Work: 807.3758s, 9073.01mb -> 7234.79mb
 ```
 
 # License
