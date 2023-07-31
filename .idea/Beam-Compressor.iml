@@ -7,8 +7,9 @@
       <excludeFolder url="file://$MODULE_DIR$/src/mods" />
       <excludeFolder url="file://$MODULE_DIR$/src/zip" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
+      <excludeFolder url="file://$MODULE_DIR$/venv11" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.10 (Beam-Compressor)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.11 (Beam-Compressor)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">
