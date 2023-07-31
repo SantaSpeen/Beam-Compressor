@@ -19,9 +19,10 @@ Then run:
 python main.py
 ```
 
-# Example output
+# Tests
+Config: 72 mods, 8.8Gb (from 1.66Mb to 1.47Gb per file)
 
-Ryzen 7 5800H, PCEx3 m2
+AMD Ryzen 7 5800H, PCEx3 m2
 ```
 Python 3.11.4 (Windows)
 Processor: AMD Ryzen 7 5800H with Radeon Graphics x16
@@ -36,7 +37,7 @@ Starting process on 72 files, 9073.01mb, cores 16...
 Work: 506.453s, 9073.01mb -> 6776.58mb
 ```
 
-Xeon E5-2640, SATA HDD 7200
+Intel Xeon E5-2640, SATA HDD 7200
 ```
 Python 3.11.4 (Linux)
 Processor: Intel(R) Xeon(R) CPU E5-2640 0 @ 2.50GHz x12
@@ -49,6 +50,21 @@ Starting process on 72 files, 9073.01mb, cores 12...
 [33] [from_start=  724.87s] [wait 1 ] | [unzip  28.56s] -> [compress 240.76s] -> [zip 294.36s] [1510.97mb -> 1411.83mb]: USSRProjectMapVer3.1AutumnEditionRelease.zip
 [71] [from_start=  806.75s] [wait 0 ] | [unzip  84.52s] -> [compress  79.56s] -> [zip 185.21s] [777.74mb -> 698.99mb]: RussianProvinceTownVer3.0FIXx0.28.zip
 Work: 807.3758s, 9073.01mb -> 7234.79mb
+```
+
+Intel Core i5-10600KF, PCEx3 m2
+```
+Python 3.10.6 (Windows)
+Processor: Intel(R) Core(TM) i5-10600KF CPU @ 4.10GHz x12
+Starting process on 72 files, 9073.01mb, cores 12...
+[1 ] Started: 2140SLver2.5fix.zip
+[3 ] Started: Bochkakvassa.zip
+[2 ] Started: Acura_NSX.zip
+...
+[71] [from_start=  306.81s] [wait 2 ] | [unzip   1.75s] -> [compress  11.31s] -> [zip  55.34s] [169.26mb ->  98.26mb]: Volkswagen_Golf_7.zip
+[56] [from_start=  375.39s] [wait 1 ] | [unzip   9.31s] -> [compress  51.64s] -> [zip 134.73s] [777.74mb -> 691.71mb]: RussianProvinceTownVer3.0FIXx0.28.zip
+[67] [from_start=  496.73s] [wait 0 ] | [unzip  11.61s] -> [compress  74.72s] -> [zip 189.52s] [1510.97mb -> 1411.44mb]: USSRProjectMapVer3.1AutumnEditionRelease.zip
+Work: 497.297s, 9073.01mb -> 6783.46mb
 ```
 
 # License
