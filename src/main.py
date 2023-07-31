@@ -51,11 +51,14 @@ async def zip_archive(file_paths, archive_name, unzip_path):
         await asyncio.gather(*tasks)
 
 
-async def compress_file(file_path):
+async def compress_file(file_path, is_preview):
     try:
-        ext = file_path[-3].lower()
+        ext = file_path[-4].lower()
+        filename = os.path.basename(file_path).lower()
+        if filename in ("_n.", "_nr", ".no"):
+            return
         image = Image.open(file_path)
-        resize_cof = 0.8
+        resize_cof = 0.8 if not is_preview else 0.4
         sizes = {16384: 4, 8192: 4, 4096: 2, 2048: 2, 1024: 2, 512: 2}
         if min(image.size) > 512:
             x, y = image.size[0], image.size[1]
@@ -67,9 +70,9 @@ async def compress_file(file_path):
                 # noinspection PyUnresolvedReferences
                 image = image.resize(new_size, resample=Image.Resampling.HAMMING, reducing_gap=1.5)
         match ext:
-            case "png":
+            case ".png":
                 image.save(file_path, format="PNG", compresslevel=9)
-            case "jpg":
+            case ".jpg":
                 image.save(file_path, format="JPEG", optimize=True, quality=25)
             case _:
                 image.save(file_path)
@@ -92,8 +95,8 @@ async def compress_files(unzip_path):
             if ext in ('txt', 'pdn', 'ini'):
                 continue
             file_path = os.path.join(path, file)
-            if ext in ('jpg', 'png', "dds"):
-                t = loop.create_task(compress_file(file_path))
+            if ext in ('jpg', 'png'):  # , "dds"):
+                t = loop.create_task(compress_file(file_path, file_path[:-4] + ".pc" in all_files))
                 wt.append(t)
             all_files.append(os.path.relpath(file_path, unzip_path))
         for dir_name in names:
