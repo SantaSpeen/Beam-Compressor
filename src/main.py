@@ -144,6 +144,10 @@ async def worker(name, loop):
 
         shutil.rmtree(unzip_path)
         sz = round(os.path.getsize(zip_path) / (1024 * 1024), 2)
+        if sz > s:
+            sz = s
+            os.remove(zip_path)
+            shutil.copy(mods_path, zip_path)
         te = round((time.monotonic_ns() - st0) / 1000000000, 2)
         ready += 1
         print(f"[{c:<2}] [from_start={te:>8}s] [wait {_counter - ready:<2}] | "
