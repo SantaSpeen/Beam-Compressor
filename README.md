@@ -1,7 +1,7 @@
 # Beam-Compressor
 
 This is a script that compresses mods.\
-`async decompresses -> async compresses png, jpg, dds -> compresses`\
+`async decompresses -> async compresses png, jpg, dds -> async compresses`\
 Lost in file size up to 30%
 
 # Installation and run
