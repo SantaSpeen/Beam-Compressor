@@ -1,7 +1,9 @@
 import asyncio
 import multiprocessing
 import os
+import platform
 import shutil
+import sys
 import time
 import traceback
 from concurrent.futures import ThreadPoolExecutor
@@ -183,6 +185,21 @@ def main():
             names.append(name)
     num_cores = multiprocessing.cpu_count()
     _counter = len(names)
+    v, m, p = sys.version_info.major, sys.version_info.minor, sys.version_info.micro
+    processor_name = "Unknown"
+    system = platform.system()
+    if system == "Windows":
+        import winreg
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"HARDWARE\DESCRIPTION\System\CentralProcessor\0")
+        processor_name = winreg.QueryValueEx(key, "ProcessorNameString")[0]
+    elif system == "Linux":
+        import subprocess
+        result = subprocess.run(['lscpu'], stdout=subprocess.PIPE)
+        output = result.stdout.decode('utf-8')
+        processor_name = [x.split(':')[1].strip() for x in output.split('\n') if 'Model name' in x][0]
+        os.system(f"ulimit -n {_counter * 500}")
+    print(f"Python {v}.{m}.{p} ({system})")
+    print(f"Processor: {processor_name.strip()} x{num_cores}")
     print(f"Starting process on {_counter} files, {size / (1024 ** 2):.2f}mb, cores {num_cores}...")
     st0 = time.monotonic_ns()
     with ThreadPoolExecutor(max_workers=num_cores) as ex:
