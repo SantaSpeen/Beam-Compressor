@@ -21,6 +21,7 @@ work_counter = 0
 prog_counter = 0
 redy_counter = 0
 st0 = 0
+skipped_size = 0
 
 
 class Mod:
@@ -126,7 +127,7 @@ class Mod:
         await asyncio.gather(*tasks)
 
     async def start(self):
-        global work_counter, redy_counter, prog_counter
+        global work_counter, redy_counter, prog_counter, skipped_size
         work_counter += 1
         c = work_counter
         try:
@@ -136,6 +137,7 @@ class Mod:
             st = time.monotonic_ns()
             await self.unzip()
             if self.map:
+                skipped_size += s
                 raise KeyboardInterrupt
             z = round((time.monotonic_ns() - st) / 1000000000, 2)
             prog_counter += 1
@@ -216,8 +218,11 @@ def main():
         for mod in mods:
             ex.submit(mod.run)
     size2 = sum(os.path.getsize(os.path.join("zip", name)) for name in os.listdir("zip"))
+    skipped_text = ""
+    if skipped_size > 0:
+        skipped_text = f"(skipped: {skipped_size:.2f}mb)"
     print(f"Work: {round((time.monotonic_ns() - st) / 1000000000, 4)}s, "
-          f"{size / (1024 ** 2):.2f}mb -> {size2 / (1024 ** 2):.2f}mb")
+          f"{size / (1024 ** 2):.2f}mb -> {size2 / (1024 ** 2):.2f}mb {skipped_text}")
 
 
 if __name__ == '__main__':
