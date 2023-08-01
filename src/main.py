@@ -30,14 +30,21 @@ class Mod:
         self.loop = None
         self.mod_path = mods_old + name
         self.tmp_path = tmp + name[:-4]
-        self.zip_path = mods_new + name
+        self.zip_path = mods_new + "cmp_" + name
         os.mkdir(self.tmp_path)
         self.files_list = []
+        self.map = False
 
     async def unzip(self):
 
         async def unzip_file(file, info):
             path = f"{self.tmp_path}/{info.filename}"
+            if self.map:
+                return
+            if "levels/" in path:
+                self.map = True
+                print(f'WARNING: maps cannot work correctly after repacking! Skipping {self.name}')
+                return
             if ((path.endswith("/") or os.path.isdir(path)) and not os.path.exists(path)) or not os.path.exists(
                     os.path.dirname(path)):
                 os.makedirs(os.path.dirname(path))
@@ -128,6 +135,8 @@ class Mod:
 
             st = time.monotonic_ns()
             await self.unzip()
+            if self.map:
+                raise KeyboardInterrupt
             z = round((time.monotonic_ns() - st) / 1000000000, 2)
             prog_counter += 1
 
@@ -151,8 +160,12 @@ class Mod:
             redy_counter += 1
             print(f"[{c:<2}] [from_start={te:>8}s] [wait {mods_counter - redy_counter:<2}] | "
                   f"[unzip {z:>6}s] -> [compress {cs:>6}s] -> [zip {uz:>6}s] [{s:>6}mb -> {sz:>6}mb]: {self.name}")
+        except KeyboardInterrupt:
+            redy_counter += 1
+            prog_counter += 3
         except Exception as e:
             redy_counter += 1
+            prog_counter += 3
             print(f"[{c:<2}] Exception: {e}")
             traceback.print_exc()
         self.loop.stop()
